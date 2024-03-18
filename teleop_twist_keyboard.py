@@ -233,12 +233,17 @@ if __name__=="__main__":
                 z = moveBindings[key][2]
                 th = moveBindings[key][3]
             elif key in speedBindings.keys():
-                speed = min(speed_limit, speed + speedBindings[key][0])	
-                turn = min(turn_limit, turn + speedBindings[key][1])
+                speed = max(lower_speed_limit,min(speed_limit, abs(speed + speedBindings[key][0])))     
+                turn = max(lower_turn_limit,min(turn_limit, abs(turn + speedBindings[key][1])))
                 if speed == speed_limit:
-                    print("Linear speed limit reached!")
+                    print("Max Linear speed!")
+                elif speed == lower_speed_limit:
+                    print("Min Linear speed!")
                 if turn == turn_limit:
-                    print("Angular speed limit reached!")
+                    print("Max Angular speed!")
+                elif turn == lower_turn_limit:
+                    print("Min Angular speed!")
+
                 
                 print(vels(speed,turn))
                 if (status == 14):
